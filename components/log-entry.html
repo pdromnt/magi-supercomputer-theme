@@ -1,0 +1,52 @@
+<!-- MAGI Log Entry — timestamped event log row -->
+<style>
+  .magi-log {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #33ff88;
+    max-width: 500px;
+  }
+
+  .magi-log-entry {
+    display: flex;
+    gap: 8px;
+    padding: 2px 0;
+    border-bottom: 1px solid rgba(26, 51, 40, 0.5);
+  }
+
+  .magi-log-time {
+    color: #1a7a40;
+    width: 35px;
+    flex-shrink: 0;
+  }
+
+  .magi-log-action {
+    color: #ff9933;
+    flex-shrink: 0;
+  }
+
+  .magi-log-name {
+    color: #33ff88;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>
+
+<div class="magi-log">
+  <div class="magi-log-entry">
+    <span class="magi-log-time">09:22</span>
+    <span class="magi-log-action">health: unhealthy → healthy</span>
+    <span class="magi-log-name">amber</span>
+  </div>
+  <div class="magi-log-entry">
+    <span class="magi-log-time">08:51</span>
+    <span class="magi-log-action">started</span>
+    <span class="magi-log-name">boardz-app</span>
+  </div>
+  <div class="magi-log-entry">
+    <span class="magi-log-time">02:15</span>
+    <span class="magi-log-action">stopped</span>
+    <span class="magi-log-name">kong</span>
+  </div>
+</div>

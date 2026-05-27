@@ -1,0 +1,37 @@
+/* ── MAGI Supercomputer Theme ─────────────────────────── *
+ * Framework-agnostic CSS custom properties.
+ * Drop this file into any project. All colors reference
+ * these variables — override them to switch themes.
+ * ─────────────────────────────────────────────────────── */
+
+:root {
+  /* Backgrounds */
+  --magi-bg:           #050a08;
+  --magi-panel:        #0a1210;
+  --magi-panel-alt:    #0d1812;
+
+  /* Text */
+  --magi-text:         #33ff88;
+  --magi-text-dim:     #1a7a40;
+  --magi-text-alt:     #ff9933;
+
+  /* Accents */
+  --magi-accent:       #33ff88;   /* green  — primary */
+  --magi-accent-alt:   #ff9933;   /* amber  — secondary */
+  --magi-blue:         #33aaff;   /* blue   — tertiary  */
+  --magi-red:          #ff3344;   /* red    — danger    */
+  --magi-amber:        #ffaa22;   /* yellow — warning   */
+
+  /* Borders */
+  --magi-border:       #1a3328;
+  --magi-border-hover: color-mix(in srgb, #1a3328 55%, #33ff88 45%);
+
+  /* Typography */
+  --magi-font:         'Share Tech Mono', 'JetBrains Mono', 'Courier New', monospace;
+  --magi-font-size:    13px;
+  --magi-line-height:  1.5;
+
+  /* Effects */
+  --magi-glow:         0 0 8px currentColor;
+  --magi-scanline:     rgba(0, 0, 0, 0.08);
+}

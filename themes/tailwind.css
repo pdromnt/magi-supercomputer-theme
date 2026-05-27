@@ -1,0 +1,33 @@
+/* ── MAGI Supercomputer Theme — Tailwind v4 ──────────── *
+ * Zero-config: import into your main CSS file.
+ * Uses Tailwind v4's @theme block for colors and fonts.
+ * All tokens are available as utility classes:
+ *   bg-magi-bg, text-magi-accent, font-magi, etc.
+ * ─────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+@theme {
+  /* Backgrounds */
+  --color-magi-bg:           #050a08;
+  --color-magi-panel:        #0a1210;
+  --color-magi-panel-alt:    #0d1812;
+
+  /* Text */
+  --color-magi-text:         #33ff88;
+  --color-magi-text-dim:     #1a7a40;
+  --color-magi-text-alt:     #ff9933;
+
+  /* Accents */
+  --color-magi-accent:       #33ff88;
+  --color-magi-accent-alt:   #ff9933;
+  --color-magi-blue:         #33aaff;
+  --color-magi-red:          #ff3344;
+  --color-magi-amber:        #ffaa22;
+
+  /* Borders */
+  --color-magi-border:       #1a3328;
+
+  /* Typography */
+  --font-magi:               'Share Tech Mono', 'JetBrains Mono', monospace;
+}

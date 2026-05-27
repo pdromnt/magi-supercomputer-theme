@@ -1,0 +1,81 @@
+/* ── MAGI CRT Effects ────────────────────────────────── *
+ * Optional drop-in. Import after the main theme.
+ * To disable: add class "crt-off" to <body>.
+ * To toggle: document.body.classList.toggle('crt-off')
+ * ─────────────────────────────────────────────────────── */
+
+/* Scanline overlay — thin horizontal lines */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.08) 0px,
+    rgba(0, 0, 0, 0.08) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Vignette — darkened edges */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 60%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  pointer-events: none;
+  z-index: 99;
+}
+
+/* Screen flicker — subtle, periodic */
+@keyframes magi-flicker {
+  0%   { opacity: 1; }
+  1%   { opacity: 0.92; }
+  2%   { opacity: 1; }
+  5%   { opacity: 0.97; }
+  6%   { opacity: 1; }
+  93%  { opacity: 1; }
+  94%  { opacity: 0.85; }
+  95%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+body {
+  animation: magi-flicker 8s infinite;
+}
+
+/* Disable all CRT effects */
+body.crt-off::after,
+body.crt-off::before {
+  display: none !important;
+}
+
+body.crt-off {
+  animation: none !important;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050a08;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a3328;
+}
+
+/* Fix for Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1a3328 #050a08;
+}

@@ -1,0 +1,43 @@
+/* ── MAGI Supercomputer Theme — shadcn/ui ────────────── *
+ * Override shadcn/ui CSS variables in your globals.css.
+ * Replace the default :root / .dark block with these.
+ * Assumes Share Tech Mono is loaded via @import or <link>.
+ * ─────────────────────────────────────────────────────── */
+
+@layer base {
+  :root {
+    --background:        #050a08;
+    --foreground:        #33ff88;
+    --card:              #0a1210;
+    --card-foreground:   #33ff88;
+    --popover:           #0a1210;
+    --popover-foreground:#33ff88;
+    --primary:           #33ff88;
+    --primary-foreground:#050a08;
+    --secondary:         #1a3328;
+    --secondary-foreground: #33ff88;
+    --muted:             #0d1812;
+    --muted-foreground:  #1a7a40;
+    --accent:            #ff9933;
+    --accent-foreground: #050a08;
+    --destructive:       #ff3344;
+    --destructive-foreground: #ffffff;
+    --border:            #1a3328;
+    --input:             #1a3328;
+    --ring:              #33ff88;
+    --radius:            0;
+
+    --font-sans:         'Share Tech Mono', 'JetBrains Mono', monospace;
+    --font-mono:         'Share Tech Mono', 'JetBrains Mono', monospace;
+
+    /* shadcn sidebar tokens */
+    --sidebar-background:       #0a1210;
+    --sidebar-foreground:       #1a7a40;
+    --sidebar-primary:          #33ff88;
+    --sidebar-primary-foreground: #050a08;
+    --sidebar-accent:           #ff9933;
+    --sidebar-accent-foreground: #050a08;
+    --sidebar-border:           #1a3328;
+    --sidebar-ring:             #33ff88;
+  }
+}

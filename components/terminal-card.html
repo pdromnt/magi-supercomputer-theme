@@ -1,0 +1,71 @@
+<!-- MAGI Terminal Card — panel with header and data rows -->
+<style>
+  .magi-card {
+    background: #0a1210;
+    border: 1px solid #1a3328;
+    padding: 0;
+    font-family: 'Share Tech Mono', monospace;
+    color: #33ff88;
+    max-width: 400px;
+  }
+
+  .magi-card-header {
+    padding: 10px 16px;
+    border-bottom: 1px solid #1a3328;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #1a7a40;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .magi-card-header .name {
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: #ff9933;
+    text-shadow: 0 0 6px #ff9933;
+  }
+
+  .magi-card-body {
+    padding: 10px 16px;
+  }
+
+  .magi-row {
+    display: flex;
+    padding: 2px 0;
+    gap: 8px;
+  }
+
+  .magi-key {
+    color: #1a7a40;
+    min-width: 70px;
+    flex-shrink: 0;
+  }
+
+  .magi-val {
+    color: #33ff88;
+  }
+</style>
+
+<div class="magi-card">
+  <div class="magi-card-header">
+    <span class="name">MELCHIOR</span>
+    <span>SYSTEM ANALYSIS</span>
+  </div>
+  <div class="magi-card-body">
+    <div class="magi-row">
+      <span class="magi-key">HOST</span>
+      <span class="magi-val">luxray</span>
+    </div>
+    <div class="magi-row">
+      <span class="magi-key">OS</span>
+      <span class="magi-val">Ubuntu 24.04 LTS</span>
+    </div>
+    <div class="magi-row">
+      <span class="magi-key">UPTIME</span>
+      <span class="magi-val">2d 14h 22m</span>
+    </div>
+  </div>
+</div>

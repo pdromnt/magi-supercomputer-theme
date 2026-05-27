@@ -1,0 +1,23 @@
+<!-- MAGI Status Dot — blinking indicator -->
+<style>
+  @keyframes blink-green  { 0%,100% { opacity:1 } 50% { opacity:0.3 } }
+  @keyframes blink-amber { 0%,100% { opacity:1 } 50% { opacity:0.3 } }
+  @keyframes blink-red    { 0%,100% { opacity:1 } 50% { opacity:0.2 } }
+
+  .magi-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+
+  .magi-dot.green  { background: #33ff88; box-shadow: 0 0 6px #33ff88; animation: blink-green 3s infinite; }
+  .magi-dot.amber  { background: #ffaa22; box-shadow: 0 0 6px #ffaa22; animation: blink-amber 1.5s infinite; }
+  .magi-dot.red    { background: #ff3344; box-shadow: 0 0 6px #ff3344; animation: blink-red 1s infinite; }
+  .magi-dot.off    { background: #1a7a40; box-shadow: none; animation: none; }
+</style>
+
+<span class="magi-dot green"></span>  Healthy
+<span class="magi-dot amber"></span>  Degraded
+<span class="magi-dot red"></span>    Down
+<span class="magi-dot off"></span>    Offline

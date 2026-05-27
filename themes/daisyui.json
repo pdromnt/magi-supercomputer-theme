@@ -1,0 +1,39 @@
+{
+  "magi": {
+    "color-scheme": "dark",
+    "primary": "#33ff88",
+    "primary-content": "#050a08",
+    "secondary": "#ff9933",
+    "secondary-content": "#050a08",
+    "accent": "#33aaff",
+    "accent-content": "#050a08",
+    "neutral": "#0a1210",
+    "neutral-content": "#33ff88",
+    "base-100": "#050a08",
+    "base-200": "#0a1210",
+    "base-300": "#0d1812",
+    "base-content": "#33ff88",
+    "info": "#33aaff",
+    "info-content": "#050a08",
+    "success": "#33ff88",
+    "success-content": "#050a08",
+    "warning": "#ffaa22",
+    "warning-content": "#050a08",
+    "error": "#ff3344",
+    "error-content": "#ffffff",
+
+    "--rounded-box": "0",
+    "--rounded-btn": "0",
+    "--rounded-badge": "0",
+    "--tab-radius": "0",
+    "--animation-btn": "0.15s",
+    "--animation-input": "0.15s",
+    "--btn-focus-scale": "1",
+    "--border-btn": "1px",
+    "--tab-border": "1px",
+    "--font-family": "'Share Tech Mono', 'JetBrains Mono', monospace",
+
+    "--glow-primary": "0 0 8px #33ff88",
+    "--glow-secondary": "0 0 8px #ff9933"
+  }
+}

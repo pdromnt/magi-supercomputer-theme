@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAGI Supercomputer Theme — Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../themes/variables.css">
+<link rel="stylesheet" href="../effects/crt.css">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--magi-bg);
+    color: var(--magi-text);
+    font-family: var(--magi-font);
+    font-size: var(--magi-font-size);
+    line-height: var(--magi-line-height);
+    min-height: 100vh;
+  }
+
+  .app {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 24px 16px;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 40px 0 32px;
+  }
+
+  .hero h1 {
+    font-size: 22px;
+    letter-spacing: 6px;
+    color: var(--magi-accent-alt);
+    text-shadow: 0 0 12px var(--magi-accent-alt);
+    margin-bottom: 8px;
+  }
+
+  .hero p {
+    color: var(--magi-text-dim);
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Panel ──────────────────────────────────────── */
+  .panel {
+    background: var(--magi-panel);
+    border: 1px solid var(--magi-border);
+  }
+
+  .panel-header {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--magi-border);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--magi-text-dim);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .panel-header .name {
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: var(--magi-accent-alt);
+    text-shadow: 0 0 6px currentColor;
+  }
+
+  .panel-body { padding: 12px 16px; }
+
+  .row { display: flex; gap: 8px; padding: 2px 0; }
+  .key { color: var(--magi-text-dim); min-width: 70px; flex-shrink: 0; }
+  .val { color: var(--magi-text); }
+  .val.accent { color: var(--magi-accent); }
+  .val.amber { color: var(--magi-amber); }
+  .val.red { color: var(--magi-red); }
+
+  /* ── Status dot ──────────────────────────────────── */
+  @keyframes blink-green  { 0%,100% { opacity:1 } 50% { opacity:0.3 } }
+  @keyframes blink-amber { 0%,100% { opacity:1 } 50% { opacity:0.3 } }
+  @keyframes blink-red    { 0%,100% { opacity:1 } 50% { opacity:0.2 } }
+
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .dot.green  { background: var(--magi-accent); box-shadow: 0 0 6px var(--magi-accent); animation: blink-green 3s infinite; }
+  .dot.amber  { background: var(--magi-amber); box-shadow: 0 0 6px var(--magi-amber); animation: blink-amber 1.5s infinite; }
+  .dot.red    { background: var(--magi-red); box-shadow: 0 0 6px var(--magi-red); animation: blink-red 1s infinite; }
+  .dot.off    { background: var(--magi-text-dim); box-shadow: none; animation: none; }
+
+  /* ── Progress bars ───────────────────────────────── */
+  .bar-wrap { margin: 4px 0 8px; }
+  .bar-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--magi-text-dim); margin-bottom: 2px; }
+  .bar-label .pct { color: var(--magi-text); }
+  .bar-outer { height: 10px; background: var(--magi-panel-alt); border: 1px solid var(--magi-border); overflow: hidden; }
+  .bar-inner { height: 100%; transition: width 0.5s ease; }
+  .bar-inner.green { background: linear-gradient(90deg, #1a6630, var(--magi-accent)); box-shadow: 0 0 8px rgba(51,255,136,0.3); }
+  .bar-inner.amber { background: linear-gradient(90deg, #664000, var(--magi-amber)); box-shadow: 0 0 8px rgba(255,170,34,0.3); }
+  .bar-inner.red   { background: linear-gradient(90deg, #661111, var(--magi-red)); box-shadow: 0 0 8px rgba(255,51,68,0.3); }
+
+  /* ── Log ─────────────────────────────────────────── */
+  .log { margin: 0; }
+  .log-entry { display: flex; gap: 8px; padding: 2px 0; font-size: 10px; border-bottom: 1px solid color-mix(in srgb, var(--magi-border) 50%, transparent); }
+  .log-time { color: var(--magi-text-dim); width: 35px; flex-shrink: 0; }
+  .log-action { color: var(--magi-accent-alt); flex-shrink: 0; }
+  .log-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  /* ── Buttons ─────────────────────────────────────── */
+  .btn-grid { display: flex; gap: 8px; flex-wrap: wrap; padding: 4px 0; }
+  .btn {
+    padding: 4px 12px;
+    background: var(--magi-panel-alt);
+    border: 1px solid var(--magi-border);
+    color: var(--magi-text);
+    font-family: var(--magi-font);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .btn:hover { border-color: var(--magi-accent); color: var(--magi-accent); }
+  .btn.primary { background: var(--magi-accent); color: var(--magi-bg); border-color: var(--magi-accent); }
+  .btn.danger { border-color: var(--magi-red); color: var(--magi-red); }
+  .btn.danger:hover { background: var(--magi-red); color: #fff; }
+
+  /* ── Full-width panel ────────────────────────────── */
+  .panel-full { margin-bottom: 24px; }
+
+  /* ── Footer ──────────────────────────────────────── */
+  .footer {
+    text-align: center;
+    color: var(--magi-text-dim);
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 8px 0 24px;
+    border-top: 1px solid var(--magi-border);
+  }
+
+  .footer a { color: var(--magi-accent-alt); text-decoration: none; }
+  .footer a:hover { text-shadow: 0 0 6px currentColor; }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="hero">
+    <h1>MAGI SUPERCOMPUTER</h1>
+    <p>THEME PREVIEW · TOKYO-3 NERV HEADQUARTERS</p>
+  </div>
+
+  <div class="grid">
+    <!-- Status dots -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="name">STATUS</span>
+        <span>INDICATORS</span>
+      </div>
+      <div class="panel-body">
+        <div class="row"><span class="dot green"></span><span class="val accent">ONLINE — System nominal</span></div>
+        <div class="row"><span class="dot amber"></span><span class="val amber">DEGRADED — Partial outage</span></div>
+        <div class="row"><span class="dot red"></span><span class="val red">OFFLINE — Service down</span></div>
+        <div class="row"><span class="dot off"></span><span class="val" style="color: var(--magi-text-dim)">UNKNOWN — No data</span></div>
+      </div>
+    </div>
+
+    <!-- Progress bars -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="name">RESOURCES</span>
+        <span>UTILIZATION</span>
+      </div>
+      <div class="panel-body">
+        <div class="bar-wrap">
+          <div class="bar-label"><span>CPU</span><span class="pct">23%</span></div>
+          <div class="bar-outer"><div class="bar-inner green" style="width:23%"></div></div>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar-label"><span>RAM</span><span class="pct">67%</span></div>
+          <div class="bar-outer"><div class="bar-inner amber" style="width:67%"></div></div>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar-label"><span>DISK</span><span class="pct">91%</span></div>
+          <div class="bar-outer"><div class="bar-inner red" style="width:91%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data table -->
+  <div class="panel panel-full">
+    <div class="panel-header">
+      <span class="name">BALTHASAR</span>
+      <span>SYSTEM ANALYSIS</span>
+    </div>
+    <div class="panel-body">
+      <div class="row"><span class="key">HOST</span><span class="val">luxray</span></div>
+      <div class="row"><span class="key">OS</span><span class="val">Ubuntu 24.04 LTS</span></div>
+      <div class="row"><span class="key">KERNEL</span><span class="val">6.17.0-1014-oracle</span></div>
+      <div class="row"><span class="key">ARCH</span><span class="val">aarch64</span></div>
+      <div class="row"><span class="key">UPTIME</span><span class="val">2d 14h 22m</span></div>
+      <div class="row"><span class="key">LOAD</span><span class="val">0.88 / 0.56 / 0.34</span></div>
+      <div class="row"><span class="key">PROCS</span><span class="val">273</span></div>
+    </div>
+  </div>
+
+  <!-- Event log -->
+  <div class="panel panel-full">
+    <div class="panel-header">
+      <span class="name">EVENTS</span>
+      <span>SYSTEM LOG</span>
+    </div>
+    <div class="panel-body log">
+      <div class="log-entry">
+        <span class="log-time">09:22</span>
+        <span class="log-action">health: unhealthy → healthy</span>
+        <span class="log-name">amber</span>
+      </div>
+      <div class="log-entry">
+        <span class="log-time">08:51</span>
+        <span class="log-action">started</span>
+        <span class="log-name">boardz-app</span>
+      </div>
+      <div class="log-entry">
+        <span class="log-time">06:00</span>
+        <span class="log-action">backup: success</span>
+        <span class="log-name">server (1.2G → R2)</span>
+      </div>
+      <div class="log-entry">
+        <span class="log-time">02:15</span>
+        <span class="log-action">stopped</span>
+        <span class="log-name">kong (maintenance)</span>
+      </div>
+      <div class="log-entry">
+        <span class="log-time">00:01</span>
+        <span class="log-action">health: healthy</span>
+        <span class="log-name">vaultwarden</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="panel panel-full">
+    <div class="panel-header">
+      <span class="name">ACTIONS</span>
+      <span>CONTROLS</span>
+    </div>
+    <div class="panel-body">
+      <div class="btn-grid">
+        <button class="btn primary">EXECUTE</button>
+        <button class="btn">ANALYZE</button>
+        <button class="btn">REPORT</button>
+        <button class="btn danger">ABORT</button>
+      </div>
+      <div class="row" style="margin-top: 8px;">
+        <span class="key">STATUS</span>
+        <span class="val accent">█ NOMINAL · NO ANOMALIES DETECTED</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="https://github.com/pdromnt/magi-supercomputer-theme">magi-supercomputer-theme</a> ·
+    <a href="../themes/variables.css">variables.css</a> ·
+    <a href="../effects/crt.css">crt.css</a> ·
+    Ctrl+Shift+C to toggle CRT effects
+  </div>
+</div>
+
+<script>
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+      document.body.classList.toggle('crt-off')
+    }
+  })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!-- MAGI Progress Bar — color-tiered with label -->
+<style>
+  .magi-bar-wrap { margin: 4px 0 8px; max-width: 400px; }
+  .magi-bar-label { display: flex; justify-content: space-between; font-size: 11px; font-family: 'Share Tech Mono', monospace; color: #1a7a40; margin-bottom: 2px; }
+  .magi-bar-label .pct { color: #33ff88; }
+  .magi-bar-outer { height: 10px; background: #0d1a15; border: 1px solid #1a3328; overflow: hidden; }
+  .magi-bar-inner { height: 100%; transition: width 0.5s ease; }
+
+  .magi-bar-inner.green { background: linear-gradient(90deg, #1a6630, #33ff88); box-shadow: 0 0 8px rgba(51,255,136,0.3); }
+  .magi-bar-inner.amber { background: linear-gradient(90deg, #664000, #ffaa22); box-shadow: 0 0 8px rgba(255,170,34,0.3); }
+  .magi-bar-inner.red   { background: linear-gradient(90deg, #661111, #ff3344); box-shadow: 0 0 8px rgba(255,51,68,0.3); }
+</style>
+
+<div class="magi-bar-wrap">
+  <div class="magi-bar-label"><span>CPU</span><span class="pct">23%</span></div>
+  <div class="magi-bar-outer"><div class="magi-bar-inner green" style="width:23%"></div></div>
+</div>
+
+<div class="magi-bar-wrap">
+  <div class="magi-bar-label"><span>RAM</span><span class="pct">67%</span></div>
+  <div class="magi-bar-outer"><div class="magi-bar-inner amber" style="width:67%"></div></div>
+</div>
+
+<div class="magi-bar-wrap">
+  <div class="magi-bar-label"><span>DISK</span><span class="pct">91%</span></div>
+  <div class="magi-bar-outer"><div class="magi-bar-inner red" style="width:91%"></div></div>
+</div>
