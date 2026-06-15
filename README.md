@@ -4,6 +4,9 @@ A dark, CRT-inspired theme for web dashboards and terminal-style UIs. Based on t
 
 **Preview:** Open `preview/index.html` in a browser.
 
+<img width="1907" height="906" alt="Screenshot of an dashboard built with this theme." src="https://github.com/user-attachments/assets/17bdde54-596a-4e21-8798-1ff7af9f8088" />
+
+
 ## Color palette
 
 | Token | Hex | Role |
