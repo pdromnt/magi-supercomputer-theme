@@ -1,43 +1,44 @@
-/* ── MAGI Supercomputer Theme — shadcn/ui ────────────── *
- * Override shadcn/ui CSS variables in your globals.css.
- * Replace the default :root / .dark block with these.
- * Assumes Share Tech Mono is loaded via @import or <link>.
- * ─────────────────────────────────────────────────────── */
+/* MAGI Design System v2 — shadcn/ui CSS variable adapter.
+ * Paste these values into the theme root in your global stylesheet.
+ */
 
 @layer base {
-  :root {
-    --background:        #050a08;
-    --foreground:        #33ff88;
-    --card:              #0a1210;
-    --card-foreground:   #33ff88;
-    --popover:           #0a1210;
-    --popover-foreground:#33ff88;
-    --primary:           #33ff88;
-    --primary-foreground:#050a08;
-    --secondary:         #1a3328;
-    --secondary-foreground: #33ff88;
-    --muted:             #0d1812;
-    --muted-foreground:  #1a7a40;
-    --accent:            #ff9933;
-    --accent-foreground: #050a08;
-    --destructive:       #ff3344;
-    --destructive-foreground: #ffffff;
-    --border:            #1a3328;
-    --input:             #1a3328;
-    --ring:              #33ff88;
-    --radius:            0;
-
-    --font-sans:         'Share Tech Mono', 'JetBrains Mono', monospace;
-    --font-mono:         'Share Tech Mono', 'JetBrains Mono', monospace;
-
-    /* shadcn sidebar tokens */
-    --sidebar-background:       #0a1210;
-    --sidebar-foreground:       #1a7a40;
-    --sidebar-primary:          #33ff88;
+  :root,
+  .dark,
+  [data-magi-theme='amber'] {
+    --background: #050a08;
+    --foreground: #33ff88;
+    --card: #0a1210;
+    --card-foreground: #33ff88;
+    --popover: #12231a;
+    --popover-foreground: #f4fff8;
+    --primary: #33ff88;
+    --primary-foreground: #050a08;
+    --secondary: #0d1812;
+    --secondary-foreground: #ff9933;
+    --muted: #0d1812;
+    --muted-foreground: #67b582;
+    --accent: #12231a;
+    --accent-foreground: #33ff88;
+    --destructive: #ff3344;
+    --border: #356f52;
+    --input: #356f52;
+    --ring: #33ff88;
+    --chart-1: #33ff88;
+    --chart-2: #ff9933;
+    --chart-3: #33aaff;
+    --chart-4: #ffaa22;
+    --chart-5: #ff3344;
+    --radius: 0.125rem;
+    --sidebar: #0a1210;
+    --sidebar-foreground: #67b582;
+    --sidebar-primary: #33ff88;
     --sidebar-primary-foreground: #050a08;
-    --sidebar-accent:           #ff9933;
-    --sidebar-accent-foreground: #050a08;
-    --sidebar-border:           #1a3328;
-    --sidebar-ring:             #33ff88;
+    --sidebar-accent: #12231a;
+    --sidebar-accent-foreground: #33ff88;
+    --sidebar-border: #1a3328;
+    --sidebar-ring: #33ff88;
+    --font-sans: 'Share Tech Mono', 'JetBrains Mono', 'Cascadia Mono', monospace;
+    --font-mono: 'Share Tech Mono', 'JetBrains Mono', 'Cascadia Mono', monospace;
   }
 }

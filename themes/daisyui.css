@@ -1,0 +1,38 @@
+/* MAGI Design System v2 — daisyUI v5 theme adapter.
+ * Import after `@plugin "daisyui"` in a Tailwind CSS v4 stylesheet.
+ */
+
+@plugin "daisyui/theme" {
+  name: "magi";
+  default: false;
+  prefersdark: true;
+  color-scheme: "dark";
+  --color-base-100: #050a08;
+  --color-base-200: #0a1210;
+  --color-base-300: #0d1812;
+  --color-base-content: #33ff88;
+  --color-primary: #33ff88;
+  --color-primary-content: #050a08;
+  --color-secondary: #ff9933;
+  --color-secondary-content: #050a08;
+  --color-accent: #33aaff;
+  --color-accent-content: #050a08;
+  --color-neutral: #12231a;
+  --color-neutral-content: #f4fff8;
+  --color-info: #33aaff;
+  --color-info-content: #050a08;
+  --color-success: #33ff88;
+  --color-success-content: #050a08;
+  --color-warning: #ffaa22;
+  --color-warning-content: #050a08;
+  --color-error: #ff3344;
+  --color-error-content: #f4fff8;
+  --radius-selector: 0.125rem;
+  --radius-field: 0.125rem;
+  --radius-box: 0.125rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}

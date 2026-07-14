@@ -1,291 +1,386 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-magi-theme="amber" data-magi-density="compact" data-magi-effects="flat">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MAGI Supercomputer Theme — Preview</title>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../themes/variables.css">
-<link rel="stylesheet" href="../effects/crt.css">
-<style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--magi-bg);
-    color: var(--magi-text);
-    font-family: var(--magi-font);
-    font-size: var(--magi-font-size);
-    line-height: var(--magi-line-height);
-    min-height: 100vh;
-  }
-
-  .app {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 24px 16px;
-  }
-
-  .hero {
-    text-align: center;
-    padding: 40px 0 32px;
-  }
-
-  .hero h1 {
-    font-size: 22px;
-    letter-spacing: 6px;
-    color: var(--magi-accent-alt);
-    text-shadow: 0 0 12px var(--magi-accent-alt);
-    margin-bottom: 8px;
-  }
-
-  .hero p {
-    color: var(--magi-text-dim);
-    font-size: 11px;
-    letter-spacing: 2px;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-
-  @media (max-width: 600px) {
-    .grid { grid-template-columns: 1fr; }
-  }
-
-  /* ── Panel ──────────────────────────────────────── */
-  .panel {
-    background: var(--magi-panel);
-    border: 1px solid var(--magi-border);
-  }
-
-  .panel-header {
-    padding: 10px 16px;
-    border-bottom: 1px solid var(--magi-border);
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--magi-text-dim);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .panel-header .name {
-    font-size: 14px;
-    letter-spacing: 3px;
-    color: var(--magi-accent-alt);
-    text-shadow: 0 0 6px currentColor;
-  }
-
-  .panel-body { padding: 12px 16px; }
-
-  .row { display: flex; gap: 8px; padding: 2px 0; }
-  .key { color: var(--magi-text-dim); min-width: 70px; flex-shrink: 0; }
-  .val { color: var(--magi-text); }
-  .val.accent { color: var(--magi-accent); }
-  .val.amber { color: var(--magi-amber); }
-  .val.red { color: var(--magi-red); }
-
-  /* ── Status dot ──────────────────────────────────── */
-  @keyframes blink-green  { 0%,100% { opacity:1 } 50% { opacity:0.3 } }
-  @keyframes blink-amber { 0%,100% { opacity:1 } 50% { opacity:0.3 } }
-  @keyframes blink-red    { 0%,100% { opacity:1 } 50% { opacity:0.2 } }
-
-  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
-  .dot.green  { background: var(--magi-accent); box-shadow: 0 0 6px var(--magi-accent); animation: blink-green 3s infinite; }
-  .dot.amber  { background: var(--magi-amber); box-shadow: 0 0 6px var(--magi-amber); animation: blink-amber 1.5s infinite; }
-  .dot.red    { background: var(--magi-red); box-shadow: 0 0 6px var(--magi-red); animation: blink-red 1s infinite; }
-  .dot.off    { background: var(--magi-text-dim); box-shadow: none; animation: none; }
-
-  /* ── Progress bars ───────────────────────────────── */
-  .bar-wrap { margin: 4px 0 8px; }
-  .bar-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--magi-text-dim); margin-bottom: 2px; }
-  .bar-label .pct { color: var(--magi-text); }
-  .bar-outer { height: 10px; background: var(--magi-panel-alt); border: 1px solid var(--magi-border); overflow: hidden; }
-  .bar-inner { height: 100%; transition: width 0.5s ease; }
-  .bar-inner.green { background: linear-gradient(90deg, #1a6630, var(--magi-accent)); box-shadow: 0 0 8px rgba(51,255,136,0.3); }
-  .bar-inner.amber { background: linear-gradient(90deg, #664000, var(--magi-amber)); box-shadow: 0 0 8px rgba(255,170,34,0.3); }
-  .bar-inner.red   { background: linear-gradient(90deg, #661111, var(--magi-red)); box-shadow: 0 0 8px rgba(255,51,68,0.3); }
-
-  /* ── Log ─────────────────────────────────────────── */
-  .log { margin: 0; }
-  .log-entry { display: flex; gap: 8px; padding: 2px 0; font-size: 10px; border-bottom: 1px solid color-mix(in srgb, var(--magi-border) 50%, transparent); }
-  .log-time { color: var(--magi-text-dim); width: 35px; flex-shrink: 0; }
-  .log-action { color: var(--magi-accent-alt); flex-shrink: 0; }
-  .log-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-  /* ── Buttons ─────────────────────────────────────── */
-  .btn-grid { display: flex; gap: 8px; flex-wrap: wrap; padding: 4px 0; }
-  .btn {
-    padding: 4px 12px;
-    background: var(--magi-panel-alt);
-    border: 1px solid var(--magi-border);
-    color: var(--magi-text);
-    font-family: var(--magi-font);
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: border-color 0.15s, color 0.15s;
-  }
-  .btn:hover { border-color: var(--magi-accent); color: var(--magi-accent); }
-  .btn.primary { background: var(--magi-accent); color: var(--magi-bg); border-color: var(--magi-accent); }
-  .btn.danger { border-color: var(--magi-red); color: var(--magi-red); }
-  .btn.danger:hover { background: var(--magi-red); color: #fff; }
-
-  /* ── Full-width panel ────────────────────────────── */
-  .panel-full { margin-bottom: 24px; }
-
-  /* ── Footer ──────────────────────────────────────── */
-  .footer {
-    text-align: center;
-    color: var(--magi-text-dim);
-    font-size: 10px;
-    letter-spacing: 1px;
-    padding: 8px 0 24px;
-    border-top: 1px solid var(--magi-border);
-  }
-
-  .footer a { color: var(--magi-accent-alt); text-decoration: none; }
-  .footer a:hover { text-shadow: 0 0 6px currentColor; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive showcase for the MAGI Design System.">
+  <title>MAGI Design System — Interactive Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../magi.css">
+  <link rel="stylesheet" href="../effects/crt.css">
+  <link rel="stylesheet" href="./preview.css">
+  <script src="./app.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to showcase</a>
 
-<div class="app">
-  <div class="hero">
-    <h1>MAGI SUPERCOMPUTER</h1>
-    <p>THEME PREVIEW · TOKYO-3 NERV HEADQUARTERS</p>
-  </div>
-
-  <div class="grid">
-    <!-- Status dots -->
-    <div class="panel">
-      <div class="panel-header">
-        <span class="name">STATUS</span>
-        <span>INDICATORS</span>
-      </div>
-      <div class="panel-body">
-        <div class="row"><span class="dot green"></span><span class="val accent">ONLINE — System nominal</span></div>
-        <div class="row"><span class="dot amber"></span><span class="val amber">DEGRADED — Partial outage</span></div>
-        <div class="row"><span class="dot red"></span><span class="val red">OFFLINE — Service down</span></div>
-        <div class="row"><span class="dot off"></span><span class="val" style="color: var(--magi-text-dim)">UNKNOWN — No data</span></div>
+  <header class="showcase-topbar">
+    <div class="brand-lockup">
+      <span class="brand-mark" aria-hidden="true">▸</span>
+      <div>
+        <p class="magi-heading">MAGI Design System</p>
+        <p class="magi-kicker">Version 2 foundation · Amber protocol</p>
       </div>
     </div>
 
-    <!-- Progress bars -->
-    <div class="panel">
-      <div class="panel-header">
-        <span class="name">RESOURCES</span>
-        <span>UTILIZATION</span>
-      </div>
-      <div class="panel-body">
-        <div class="bar-wrap">
-          <div class="bar-label"><span>CPU</span><span class="pct">23%</span></div>
-          <div class="bar-outer"><div class="bar-inner green" style="width:23%"></div></div>
+    <div class="magi-cluster showcase-controls" style="--magi-cluster-gap: var(--magi-space-5)">
+      <label class="density-control">
+        <span class="magi-kicker">Density</span>
+        <select id="density-select" class="magi-select" aria-label="Preview density">
+          <option value="compact">Compact</option>
+          <option value="default">Default</option>
+          <option value="comfortable">Comfortable</option>
+        </select>
+      </label>
+      <label class="magi-control-row crt-control">
+        <input id="crt-toggle" class="magi-switch" type="checkbox">
+        <span>CRT effects</span>
+      </label>
+      <a class="magi-button" data-variant="secondary" href="../README.md">Read docs</a>
+    </div>
+  </header>
+
+  <div class="showcase-shell">
+    <aside class="showcase-sidebar" aria-label="Showcase sections">
+      <nav class="magi-nav">
+        <p class="magi-nav__label">Foundation</p>
+        <a class="magi-nav__item" href="#principles" aria-current="page">Principles</a>
+        <a class="magi-nav__item" href="#color">Color</a>
+        <a class="magi-nav__item" href="#type">Typography</a>
+        <p class="magi-nav__label">Components</p>
+        <a class="magi-nav__item" href="#buttons">Buttons</a>
+        <a class="magi-nav__item" href="#forms">Forms</a>
+        <a class="magi-nav__item" href="#navigation">Navigation</a>
+        <a class="magi-nav__item" href="#feedback">Feedback</a>
+        <a class="magi-nav__item" href="#data">Data display</a>
+        <a class="magi-nav__item" href="#overlays">Overlays</a>
+      </nav>
+    </aside>
+
+    <main id="main-content" class="showcase-main" tabindex="-1">
+      <section id="principles" class="showcase-section magi-stack">
+        <div class="section-intro">
+          <p class="magi-kicker">01 · Operating principles</p>
+          <h1 class="section-title">Dense without becoming cryptic.</h1>
+          <p class="magi-copy">MAGI uses Amber's luminous terminal language for real interfaces. Hierarchy comes from type, tone, and disciplined borders—not mystery meat controls or empty decoration.</p>
         </div>
-        <div class="bar-wrap">
-          <div class="bar-label"><span>RAM</span><span class="pct">67%</span></div>
-          <div class="bar-outer"><div class="bar-inner amber" style="width:67%"></div></div>
+
+        <div class="magi-grid principle-grid">
+          <article class="magi-panel" data-tone="primary">
+            <header class="magi-panel__header">
+              <h2 class="magi-panel__title">Readable</h2>
+              <span class="magi-panel__subtitle">Contrast first</span>
+            </header>
+            <div class="magi-panel__body magi-stack" style="--magi-stack-gap: var(--magi-space-4)">
+              <p class="magi-copy">Bright neon identifies action and status. Muted copy still meets normal-text contrast targets.</p>
+              <span class="magi-status" data-tone="success">Nominal</span>
+            </div>
+          </article>
+
+          <article class="magi-panel" data-tone="warning">
+            <header class="magi-panel__header">
+              <h2 class="magi-panel__title">Operable</h2>
+              <span class="magi-panel__subtitle">States are visible</span>
+            </header>
+            <div class="magi-panel__body magi-stack" style="--magi-stack-gap: var(--magi-space-4)">
+              <p class="magi-copy">Every interactive primitive defines hover, active, focus, disabled, invalid, and selected states.</p>
+              <button class="magi-button" type="button">Focusable control</button>
+            </div>
+          </article>
+
+          <article class="magi-panel" data-tone="info">
+            <header class="magi-panel__header">
+              <h2 class="magi-panel__title">Adaptable</h2>
+              <span class="magi-panel__subtitle">Not app cosplay</span>
+            </header>
+            <div class="magi-panel__body magi-stack" style="--magi-stack-gap: var(--magi-space-4)">
+              <p class="magi-copy">The system provides semantic building blocks. Product-specific names and fictional chrome remain in the product.</p>
+              <span class="magi-badge" data-tone="info">Framework agnostic</span>
+            </div>
+          </article>
         </div>
-        <div class="bar-wrap">
-          <div class="bar-label"><span>DISK</span><span class="pct">91%</span></div>
-          <div class="bar-outer"><div class="bar-inner red" style="width:91%"></div></div>
+      </section>
+
+      <section id="color" class="showcase-section magi-stack">
+        <div class="section-intro">
+          <p class="magi-kicker">02 · Color</p>
+          <h2 class="section-title">A small palette with explicit jobs.</h2>
+          <p class="magi-copy">Use semantic roles in application code. Raw palette values exist to build those roles, not as a grab bag.</p>
         </div>
-      </div>
-    </div>
+
+        <div class="swatch-grid" aria-label="MAGI semantic color tokens">
+          <article class="swatch" style="--swatch: var(--magi-surface-canvas)"><span>Canvas</span><code>--magi-surface-canvas</code></article>
+          <article class="swatch" style="--swatch: var(--magi-surface-panel)"><span>Panel</span><code>--magi-surface-panel</code></article>
+          <article class="swatch" style="--swatch: var(--magi-surface-raised)"><span>Raised</span><code>--magi-surface-raised</code></article>
+          <article class="swatch" style="--swatch: var(--magi-primary)"><span>Primary</span><code>--magi-primary</code></article>
+          <article class="swatch" style="--swatch: var(--magi-secondary)"><span>Secondary</span><code>--magi-secondary</code></article>
+          <article class="swatch" style="--swatch: var(--magi-info)"><span>Information</span><code>--magi-info</code></article>
+          <article class="swatch" style="--swatch: var(--magi-warning)"><span>Warning</span><code>--magi-warning</code></article>
+          <article class="swatch" style="--swatch: var(--magi-danger)"><span>Danger</span><code>--magi-danger</code></article>
+        </div>
+      </section>
+
+      <section id="type" class="showcase-section magi-stack">
+        <div class="section-intro">
+          <p class="magi-kicker">03 · Typography</p>
+          <h2 class="section-title">Monospace, with hierarchy.</h2>
+        </div>
+
+        <div class="magi-panel type-specimen">
+          <div class="magi-panel__body magi-stack">
+            <p class="magi-heading">Interface heading</p>
+            <p class="magi-kicker">Section label · 11px · tracked uppercase</p>
+            <p class="type-body">Operational data remains compact and scannable at the 13px base size. Use bright text for content and accessible muted text for supporting context.</p>
+            <p class="magi-meta">Metadata · 2026-07-14 04:18:32 UTC · node luxray</p>
+            <p><code>pnpm add magi-supercomputer-theme</code></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="buttons" class="showcase-section magi-stack">
+        <div class="section-intro">
+          <p class="magi-kicker">04 · Buttons and actions</p>
+          <h2 class="section-title">Actions look actionable now. Revolutionary.</h2>
+        </div>
+
+        <article class="magi-panel">
+          <header class="magi-panel__header"><h3 class="magi-panel__title">Variants</h3><span class="magi-panel__subtitle">Hover · focus · active · disabled</span></header>
+          <div class="magi-panel__body magi-stack">
+            <div class="magi-cluster">
+              <button class="magi-button" data-variant="primary" type="button">Execute</button>
+              <button class="magi-button" data-variant="secondary" type="button">Analyze</button>
+              <button class="magi-button" type="button">Default</button>
+              <button class="magi-button" data-variant="ghost" type="button">Ghost</button>
+              <button class="magi-button" data-variant="danger" type="button">Delete</button>
+              <button class="magi-button" type="button" disabled>Disabled</button>
+            </div>
+            <div class="magi-cluster">
+              <button class="magi-button" data-size="sm" type="button">Small</button>
+              <button class="magi-button" type="button">Default</button>
+              <button class="magi-button" data-size="lg" type="button">Large</button>
+              <button class="magi-icon-button" type="button" aria-label="Inspect item" data-magi-tooltip="Inspect item">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/></svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <div class="magi-toolbar" aria-label="Editor toolbar example">
+          <div class="magi-toolbar__group">
+            <button class="magi-icon-button" data-variant="ghost" type="button" aria-label="Toggle navigation" data-magi-tooltip="Toggle navigation">☰</button>
+            <button class="magi-button" data-variant="ghost" type="button">Write</button>
+            <button class="magi-button" data-variant="ghost" type="button">Preview</button>
+          </div>
+          <span class="magi-toolbar__separator" aria-hidden="true"></span>
+          <div class="magi-toolbar__group">
+            <button class="magi-button" type="button">Save</button>
+            <button class="magi-icon-button" data-variant="danger" type="button" aria-label="Delete item" data-magi-tooltip="Delete item">×</button>
+          </div>
+          <span class="magi-meta toolbar-status">Saved 04:18</span>
+        </div>
+      </section>
+
+      <section id="forms" class="showcase-section magi-stack">
+        <div class="section-intro">
+          <p class="magi-kicker">05 · Forms</p>
+          <h2 class="section-title">Visible boundaries. Honest validation.</h2>
+        </div>
+
+        <form id="profile-form" class="magi-panel" action="#">
+          <header class="magi-panel__header"><h3 class="magi-panel__title">Connection profile</h3><span class="magi-panel__subtitle">Example form</span></header>
+          <div class="magi-panel__body form-grid">
+            <label class="magi-field">
+              <span class="magi-field__label">Display name <span class="magi-field__required" aria-hidden="true">*</span></span>
+              <input class="magi-input" type="text" value="MELCHIOR" required aria-describedby="display-name-hint">
+              <span id="display-name-hint" class="magi-field__hint">Shown in activity and audit logs.</span>
+            </label>
+
+            <label class="magi-field">
+              <span class="magi-field__label">Region</span>
+              <select class="magi-select">
+                <option>Tokyo-3</option>
+                <option>Recife</option>
+                <option>Luxray</option>
+              </select>
+            </label>
+
+            <label class="magi-field">
+              <span class="magi-field__label">Endpoint</span>
+              <input class="magi-input" type="url" value="definitely-not-a-url" aria-invalid="true" aria-describedby="endpoint-error">
+              <span id="endpoint-error" class="magi-field__error">Enter a complete HTTPS URL.</span>
+            </label>
+
+            <label class="magi-field">
+              <span class="magi-field__label">API token</span>
+              <input class="magi-input" type="password" value="not-a-real-secret" autocomplete="off">
+            </label>
+
+            <label class="magi-field form-span">
+              <span class="magi-field__label">Notes</span>
+              <textarea class="magi-textarea" placeholder="Optional deployment notes..."></textarea>
+            </label>
+
+            <fieldset class="magi-fieldset">
+              <legend class="magi-legend">Notifications</legend>
+              <label class="magi-control-row"><input class="magi-checkbox" type="checkbox" checked><span>Email status changes</span></label>
+              <label class="magi-control-row"><input class="magi-checkbox" type="checkbox"><span>Desktop alerts</span></label>
+            </fieldset>
+
+            <fieldset class="magi-fieldset">
+              <legend class="magi-legend">Sync mode</legend>
+              <label class="magi-control-row"><input class="magi-radio" type="radio" name="sync" checked><span>Automatic</span></label>
+              <label class="magi-control-row"><input class="magi-radio" type="radio" name="sync"><span>Manual</span></label>
+              <label class="magi-control-row"><input class="magi-switch" type="checkbox" checked><span>Reconnect automatically</span></label>
+            </fieldset>
+          </div>
+          <footer class="magi-panel__footer">
+            <span class="magi-meta">Fields marked * are required.</span>
+            <div class="magi-panel__actions"><button class="magi-button" type="reset">Reset</button><button class="magi-button" data-variant="primary" type="submit">Save profile</button></div>
+          </footer>
+        </form>
+      </section>
+
+      <section id="navigation" class="showcase-section magi-stack">
+        <div class="section-intro">
+          <p class="magi-kicker">06 · Navigation</p>
+          <h2 class="section-title">Current location should never be a puzzle.</h2>
+        </div>
+
+        <article class="magi-panel">
+          <nav class="magi-tabs" aria-label="Example workspace tabs" role="tablist">
+            <button id="tab-overview" class="magi-tab" type="button" role="tab" aria-selected="true" aria-controls="panel-overview">Overview</button>
+            <button id="tab-members" class="magi-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-members" tabindex="-1">Members</button>
+            <button id="tab-activity" class="magi-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-activity" tabindex="-1">Activity</button>
+          </nav>
+          <div id="panel-overview" class="magi-panel__body" role="tabpanel" aria-labelledby="tab-overview"><p class="magi-copy">The active tab uses color and a border, not color alone. Arrow keys move between tabs.</p></div>
+          <div id="panel-members" class="magi-panel__body" role="tabpanel" aria-labelledby="tab-members" hidden><p class="magi-copy">Membership settings live here. The tab implementation preserves keyboard behavior and focus.</p></div>
+          <div id="panel-activity" class="magi-panel__body" role="tabpanel" aria-labelledby="tab-activity" hidden><p class="magi-copy">Activity events live here. This sample is intentionally boring and predictable.</p></div>
+        </article>
+
+        <nav aria-label="Breadcrumb">
+          <ol class="magi-breadcrumbs"><li><a href="#navigation">Vaults</a></li><li><a href="#navigation">Research</a></li><li aria-current="page">Project MAGI</li></ol>
+        </nav>
+      </section>
+
+      <section id="feedback" class="showcase-section magi-stack">
+        <div class="section-intro">
+          <p class="magi-kicker">07 · Feedback</p>
+          <h2 class="section-title">Status is text first, color second.</h2>
+        </div>
+
+        <div class="magi-cluster">
+          <span class="magi-status" data-tone="success" data-pulse="true">Online</span>
+          <span class="magi-status" data-tone="warning">Degraded</span>
+          <span class="magi-status" data-tone="danger">Offline</span>
+          <span class="magi-status" data-tone="info">Syncing</span>
+          <span class="magi-badge" data-tone="success">Healthy</span>
+          <span class="magi-badge" data-tone="warning">Pending</span>
+          <span class="magi-badge" data-tone="danger">Revoked</span>
+        </div>
+
+        <div class="magi-stack" style="--magi-stack-gap: var(--magi-space-4)">
+          <div class="magi-alert" data-tone="info" role="status"><span class="magi-alert__icon" aria-hidden="true">i</span><div><p class="magi-alert__title">Import ready</p><p class="magi-alert__copy">12 Markdown files passed validation and are ready to import.</p></div></div>
+          <div class="magi-alert" data-tone="warning" role="alert"><span class="magi-alert__icon" aria-hidden="true">!</span><div><p class="magi-alert__title">Unsaved changes</p><p class="magi-alert__copy">The current note has local changes that have not reached the server.</p></div><button class="magi-button" data-size="sm" type="button">Review</button></div>
+          <div class="magi-alert" data-tone="danger" role="alert"><span class="magi-alert__icon" aria-hidden="true">×</span><div><p class="magi-alert__title">Session revoked</p><p class="magi-alert__copy">This device no longer has access. Sign in again to continue.</p></div></div>
+        </div>
+
+        <button id="toast-demo" class="magi-button" type="button">Trigger toast</button>
+      </section>
+
+      <section id="data" class="showcase-section magi-stack">
+        <div class="section-intro">
+          <p class="magi-kicker">08 · Data display</p>
+          <h2 class="section-title">Operational data stays scannable.</h2>
+        </div>
+
+        <div class="magi-grid">
+          <article class="magi-panel" data-tone="info">
+            <header class="magi-panel__header"><h3 class="magi-panel__title">System</h3><span class="magi-panel__subtitle">Definition list</span></header>
+            <div class="magi-panel__body"><dl class="magi-data-list"><dt>Host</dt><dd>luxray</dd><dt>OS</dt><dd>Ubuntu 24.04 LTS</dd><dt>Uptime</dt><dd>1d 1h 2m</dd><dt>Processes</dt><dd>285</dd></dl></div>
+          </article>
+
+          <article class="magi-panel" data-tone="primary">
+            <header class="magi-panel__header"><h3 class="magi-panel__title">Resources</h3><span class="magi-panel__subtitle">Progress</span></header>
+            <div class="magi-panel__body magi-stack" style="--magi-stack-gap: var(--magi-space-5)">
+              <div class="magi-progress" style="--magi-progress-value: 23%"><div class="magi-progress__label"><span>CPU</span><span>23%</span></div><div class="magi-progress__track"><div class="magi-progress__bar"></div></div></div>
+              <div class="magi-progress" data-tone="warning" style="--magi-progress-value: 67%"><div class="magi-progress__label"><span>RAM</span><span>67%</span></div><div class="magi-progress__track"><div class="magi-progress__bar"></div></div></div>
+              <div class="magi-progress" data-tone="danger" style="--magi-progress-value: 91%"><div class="magi-progress__label"><span>Disk</span><span>91%</span></div><div class="magi-progress__track"><div class="magi-progress__bar"></div></div></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="magi-table-wrap">
+          <table class="magi-table">
+            <caption class="magi-visually-hidden">Connected user sessions</caption>
+            <thead><tr><th scope="col">User</th><th scope="col">Device</th><th scope="col">Last active</th><th scope="col">Status</th></tr></thead>
+            <tbody>
+              <tr><td>pedro</td><td>Desktop · Windows</td><td>Now</td><td><span class="magi-badge" data-tone="success">Current</span></td></tr>
+              <tr><td>rei</td><td>Browser · Linux</td><td>12m</td><td><span class="magi-badge" data-tone="info">Active</span></td></tr>
+              <tr><td>asuka</td><td>Mobile · Android</td><td>4h</td><td><span class="magi-badge" data-tone="warning">Idle</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <article class="magi-panel">
+          <header class="magi-panel__header"><h3 class="magi-panel__title">Events</h3><span class="magi-panel__subtitle">Structured log</span></header>
+          <div class="magi-panel__body magi-log">
+            <div class="magi-log__entry"><time class="magi-log__time">04:18</time><span class="magi-log__action">session.created</span><span class="magi-truncate">desktop/windows/pedro</span></div>
+            <div class="magi-log__entry"><time class="magi-log__time">04:12</time><span class="magi-log__action">vault.synced</span><span class="magi-truncate">research · 42 changes</span></div>
+            <div class="magi-log__entry"><time class="magi-log__time">03:51</time><span class="magi-log__action">invite.accepted</span><span class="magi-truncate">rei@example.invalid</span></div>
+          </div>
+        </article>
+      </section>
+
+      <section id="overlays" class="showcase-section magi-stack">
+        <div class="section-intro">
+          <p class="magi-kicker">09 · Overlays and transient UI</p>
+          <h2 class="section-title">Useful layers, not modal soup.</h2>
+        </div>
+
+        <div class="magi-grid overlay-grid">
+          <article class="magi-panel">
+            <header class="magi-panel__header"><h3 class="magi-panel__title">Dialog</h3></header>
+            <div class="magi-panel__body magi-stack" style="--magi-stack-gap: var(--magi-space-5)"><p class="magi-copy">Uses the native dialog element, backdrop, focus management, and an explicit destructive action.</p><button id="open-dialog" class="magi-button" data-variant="danger" type="button">Revoke session</button></div>
+          </article>
+
+          <article class="magi-panel">
+            <header class="magi-panel__header"><h3 class="magi-panel__title">Command surface</h3></header>
+            <div class="magi-panel__body">
+              <div class="magi-command">
+                <label class="magi-field"><span class="magi-visually-hidden">Filter commands</span><input id="command-filter" class="magi-input" type="search" placeholder="Type a command..."></label>
+                <div id="command-items" class="command-items" role="listbox" aria-label="Commands">
+                  <button class="magi-command__item" type="button" role="option" aria-selected="true"><span>Open note</span><kbd class="magi-command__meta">Ctrl O</kbd></button>
+                  <button class="magi-command__item" type="button" role="option"><span>Create daily note</span><kbd class="magi-command__meta">Ctrl D</kbd></button>
+                  <button class="magi-command__item" type="button" role="option"><span>Toggle inspector</span><kbd class="magi-command__meta">Ctrl I</kbd></button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="magi-grid">
+          <div class="magi-empty"><span aria-hidden="true">◇</span><p>No records found.</p><button class="magi-button" type="button">Clear filters</button></div>
+          <div class="magi-panel"><div class="magi-panel__body magi-stack" aria-label="Loading state"><div class="magi-cluster"><span class="magi-spinner" aria-hidden="true"></span><span>Synchronizing vault…</span></div><div class="magi-skeleton" style="width: 78%"></div><div class="magi-skeleton" style="width: 55%"></div><div class="magi-skeleton" style="width: 88%"></div></div></div>
+        </div>
+      </section>
+
+      <footer class="showcase-footer">
+        <p>MAGI Design System v2 beta · Built from Amber, hardened for actual products.</p>
+        <a href="https://github.com/pdromnt/magi-supercomputer-theme">Source repository</a>
+      </footer>
+    </main>
   </div>
 
-  <!-- Data table -->
-  <div class="panel panel-full">
-    <div class="panel-header">
-      <span class="name">BALTHASAR</span>
-      <span>SYSTEM ANALYSIS</span>
-    </div>
-    <div class="panel-body">
-      <div class="row"><span class="key">HOST</span><span class="val">luxray</span></div>
-      <div class="row"><span class="key">OS</span><span class="val">Ubuntu 24.04 LTS</span></div>
-      <div class="row"><span class="key">KERNEL</span><span class="val">6.17.0-1014-oracle</span></div>
-      <div class="row"><span class="key">ARCH</span><span class="val">aarch64</span></div>
-      <div class="row"><span class="key">UPTIME</span><span class="val">2d 14h 22m</span></div>
-      <div class="row"><span class="key">LOAD</span><span class="val">0.88 / 0.56 / 0.34</span></div>
-      <div class="row"><span class="key">PROCS</span><span class="val">273</span></div>
-    </div>
-  </div>
+  <dialog id="revoke-dialog" class="magi-dialog" aria-labelledby="revoke-title">
+    <form method="dialog">
+      <header class="magi-dialog__header"><h2 id="revoke-title" class="magi-dialog__title">Revoke this session?</h2><button class="magi-icon-button dialog-close" data-variant="ghost" value="cancel" aria-label="Close dialog">×</button></header>
+      <div class="magi-dialog__body magi-stack" style="--magi-stack-gap: var(--magi-space-5)"><div class="magi-alert" data-tone="warning"><span class="magi-alert__icon" aria-hidden="true">!</span><div><p class="magi-alert__title">Immediate effect</p><p class="magi-alert__copy">The device will need to authenticate again before accessing any vault.</p></div></div><dl class="magi-data-list"><dt>Device</dt><dd>Desktop · Windows</dd><dt>Last active</dt><dd>Now</dd><dt>Location</dt><dd>Recife, BR</dd></dl></div>
+      <footer class="magi-dialog__footer"><button class="magi-button" value="cancel">Cancel</button><button class="magi-button" data-variant="danger" value="revoke">Revoke session</button></footer>
+    </form>
+  </dialog>
 
-  <!-- Event log -->
-  <div class="panel panel-full">
-    <div class="panel-header">
-      <span class="name">EVENTS</span>
-      <span>SYSTEM LOG</span>
-    </div>
-    <div class="panel-body log">
-      <div class="log-entry">
-        <span class="log-time">09:22</span>
-        <span class="log-action">health: unhealthy → healthy</span>
-        <span class="log-name">amber</span>
-      </div>
-      <div class="log-entry">
-        <span class="log-time">08:51</span>
-        <span class="log-action">started</span>
-        <span class="log-name">boardz-app</span>
-      </div>
-      <div class="log-entry">
-        <span class="log-time">06:00</span>
-        <span class="log-action">backup: success</span>
-        <span class="log-name">server (1.2G → R2)</span>
-      </div>
-      <div class="log-entry">
-        <span class="log-time">02:15</span>
-        <span class="log-action">stopped</span>
-        <span class="log-name">kong (maintenance)</span>
-      </div>
-      <div class="log-entry">
-        <span class="log-time">00:01</span>
-        <span class="log-action">health: healthy</span>
-        <span class="log-name">vaultwarden</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Buttons -->
-  <div class="panel panel-full">
-    <div class="panel-header">
-      <span class="name">ACTIONS</span>
-      <span>CONTROLS</span>
-    </div>
-    <div class="panel-body">
-      <div class="btn-grid">
-        <button class="btn primary">EXECUTE</button>
-        <button class="btn">ANALYZE</button>
-        <button class="btn">REPORT</button>
-        <button class="btn danger">ABORT</button>
-      </div>
-      <div class="row" style="margin-top: 8px;">
-        <span class="key">STATUS</span>
-        <span class="val accent">█ NOMINAL · NO ANOMALIES DETECTED</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer">
-    <a href="https://github.com/pdromnt/magi-supercomputer-theme">magi-supercomputer-theme</a> ·
-    <a href="../themes/variables.css">variables.css</a> ·
-    <a href="../effects/crt.css">crt.css</a> ·
-    Ctrl+Shift+C to toggle CRT effects
-  </div>
-</div>
-
-<script>
-  document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.shiftKey && e.key === 'C') {
-      document.body.classList.toggle('crt-off')
-    }
-  })
-</script>
-
+  <div id="toast-region" class="magi-toast-region" role="region" aria-live="polite" aria-label="Notifications"></div>
 </body>
 </html>

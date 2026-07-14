@@ -1,93 +1,26 @@
-# MAGI Theme — DaisyUI
+# daisyUI v5
 
-## Setup
+MAGI uses daisyUI v5's CSS theme plugin syntax.
 
-1. Install DaisyUI (v4+):
+Start the stylesheet with Tailwind and daisyUI, then copy the `@plugin "daisyui/theme"` block from `themes/daisyui.css` directly below them:
 
-```bash
-npm install daisyui@latest
-```
+```css
+@import "tailwindcss";
+@plugin "daisyui";
 
-2. Add the theme to your `tailwind.config.js`:
-
-```js
-const magiTheme = require('./themes/daisyui.json')
-
-module.exports = {
-  plugins: [require('daisyui')],
-  daisyui: {
-    themes: [
-      {
-        magi: magiTheme.magi
-      }
-    ]
-  }
+@plugin "daisyui/theme" {
+  /* Copy the complete MAGI block from themes/daisyui.css. */
 }
 ```
 
-3. Add `data-theme="magi"` to your `<html>` tag:
+Select the theme on a root element:
 
 ```html
 <html data-theme="magi">
 ```
 
-4. Load the font:
+The adapter maps base surfaces, content, primary, secondary, accent, neutral, info, success, warning, error, shape, border, depth, and noise variables. It intentionally keeps depth and generated noise at zero so MAGI's hairline terminal structure remains intact.
 
-```html
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-```
+`themes/daisyui.json` is retained only for projects still on daisyUI v4. New projects should use `themes/daisyui.css`.
 
-## What changes
-
-DaisyUI components pick up the MAGI palette automatically:
-
-- `btn`, `btn-primary` → green-on-black, square corners, monospace font
-- `card` → dark panel background with green text
-- `badge`, `alert` → MAGI color scheme
-- `input`, `select`, `textarea` → dark inputs with green borders
-- `tabs`, `navbar` → zero-radius monospace tabs
-
-## Component Examples
-
-```html
-<!-- Primary button -->
-<button class="btn btn-primary">EXECUTE</button>
-
-<!-- Card -->
-<div class="card bg-base-200 border border-base-300">
-  <div class="card-body">
-    <h2 class="card-title text-secondary" style="text-shadow: 0 0 6px currentColor">
-      SYSTEM STATUS
-      <div class="badge badge-success gap-1">
-        <span class="w-2 h-2 rounded-full bg-success"></span>
-        NOMINAL
-      </div>
-    </h2>
-    <p class="text-base-content/60">All systems operational.</p>
-  </div>
-</div>
-
-<!-- Alert -->
-<div class="alert alert-warning">
-  <span>⚠ BACKUP OVERDUE — 3d 14h since last run</span>
-</div>
-
-<!-- Tabs -->
-<div role="tablist" class="tabs tabs-bordered">
-  <a role="tab" class="tab tab-active">MELCHIOR</a>
-  <a role="tab" class="tab">BALTHASAR</a>
-  <a role="tab" class="tab">CASPER</a>
-</div>
-```
-
-## Custom properties
-
-The theme also exposes glow shadows you can use:
-
-```css
-.my-element {
-  box-shadow: var(--glow-primary);
-  /* or */
-  text-shadow: var(--glow-secondary);
-}
-```
+Use daisyUI component classes normally. When exact visual parity with the framework-agnostic implementation matters, use MAGI's canonical `.magi-*` classes instead.

@@ -1,0 +1,53 @@
+{
+  "name": "magi-supercomputer-theme",
+  "version": "2.0.0-beta.1",
+  "description": "A framework-agnostic, accessible CRT-inspired design system for dense web interfaces.",
+  "type": "module",
+  "sideEffects": [
+    "*.css",
+    "themes/*.css",
+    "effects/*.css"
+  ],
+  "files": [
+    "magi.css",
+    "themes",
+    "effects",
+    "docs",
+    "LICENSE",
+    "README.md"
+  ],
+  "exports": {
+    ".": "./magi.css",
+    "./tokens": "./themes/variables.css",
+    "./base": "./themes/base.css",
+    "./components": "./themes/components.css",
+    "./effects/crt": "./effects/crt.css",
+    "./tailwind": "./themes/tailwind.css",
+    "./shadcn": "./themes/shadcn.css",
+    "./daisyui": "./themes/daisyui.css"
+  },
+  "scripts": {
+    "dev": "http-server . -p 4173 -c-1",
+    "lint": "stylelint \"**/*.css\"",
+    "test": "playwright test",
+    "test:a11y": "playwright test --grep @a11y",
+    "test:visual": "playwright test --grep @visual",
+    "test:visual:update": "playwright test --grep @visual --update-snapshots"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.12.1",
+    "@playwright/test": "1.61.1",
+    "http-server": "14.1.1",
+    "stylelint": "17.14.0",
+    "stylelint-config-standard": "40.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@11.13.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pdromnt/magi-supercomputer-theme.git"
+  }
+}

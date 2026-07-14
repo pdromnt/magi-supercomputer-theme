@@ -1,37 +1,156 @@
-/* ── MAGI Supercomputer Theme ─────────────────────────── *
- * Framework-agnostic CSS custom properties.
- * Drop this file into any project. All colors reference
- * these variables — override them to switch themes.
- * ─────────────────────────────────────────────────────── */
+/* MAGI Design System v2 — foundations
+ *
+ * Primitive values preserve Amber's visual language. Semantic aliases are the
+ * public API. Override semantic tokens in an application; avoid reaching for
+ * raw palette values in component code.
+ */
 
-:root {
-  /* Backgrounds */
-  --magi-bg:           #050a08;
-  --magi-panel:        #0a1210;
-  --magi-panel-alt:    #0d1812;
+:root,
+[data-magi-theme='amber'] {
+  color-scheme: dark;
 
-  /* Text */
-  --magi-text:         #33ff88;
-  --magi-text-dim:     #1a7a40;
-  --magi-text-alt:     #ff9933;
+  /* Palette */
+  --magi-black-950: #030604;
+  --magi-black-900: #050a08;
+  --magi-green-950: #0a1210;
+  --magi-green-900: #0d1812;
+  --magi-green-850: #12231a;
+  --magi-green-800: #1a3328;
+  --magi-green-700: #2c5944;
+  --magi-green-600: #356f52;
+  --magi-green-500: #4a8c69;
+  --magi-green-400: #67b582;
+  --magi-green-300: #8bd6a4;
+  --magi-green-200: #b7edc8;
+  --magi-green-neon: #33ff88;
+  --magi-color-orange: #ff9933;
+  --magi-color-amber: #ffaa22;
+  --magi-color-blue: #33aaff;
+  --magi-color-red: #ff3344;
+  --magi-color-white: #f4fff8;
 
-  /* Accents */
-  --magi-accent:       #33ff88;   /* green  — primary */
-  --magi-accent-alt:   #ff9933;   /* amber  — secondary */
-  --magi-blue:         #33aaff;   /* blue   — tertiary  */
-  --magi-red:          #ff3344;   /* red    — danger    */
-  --magi-amber:        #ffaa22;   /* yellow — warning   */
+  /* Semantic color roles */
+  --magi-surface-canvas: var(--magi-black-900);
+  --magi-surface-panel: var(--magi-green-950);
+  --magi-surface-raised: var(--magi-green-900);
+  --magi-surface-overlay: var(--magi-green-850);
+  --magi-surface-sunken: var(--magi-black-950);
+  --magi-surface-hover: color-mix(in srgb, var(--magi-green-neon) 6%, transparent);
+  --magi-surface-active: color-mix(in srgb, var(--magi-green-neon) 11%, transparent);
+  --magi-surface-selected: color-mix(in srgb, var(--magi-green-neon) 14%, var(--magi-surface-panel));
 
-  /* Borders */
-  --magi-border:       #1a3328;
-  --magi-border-hover: color-mix(in srgb, #1a3328 55%, #33ff88 45%);
+  --magi-fg: var(--magi-green-neon);
+  --magi-fg-muted: var(--magi-green-400);
+  --magi-fg-subtle: var(--magi-green-500);
+  --magi-fg-disabled: var(--magi-green-600);
+  --magi-fg-inverse: var(--magi-black-900);
+  --magi-fg-heading: var(--magi-color-white);
+
+  --magi-border-subtle: var(--magi-green-800);
+  --magi-border: var(--magi-green-600);
+  --magi-border-strong: var(--magi-green-500);
+  --magi-border-selected: var(--magi-green-neon);
+
+  --magi-primary: var(--magi-green-neon);
+  --magi-primary-hover: #65ff9d;
+  --magi-secondary: var(--magi-color-orange);
+  --magi-info: var(--magi-color-blue);
+  --magi-success: var(--magi-green-neon);
+  --magi-warning: var(--magi-color-amber);
+  --magi-danger: var(--magi-color-red);
+  --magi-focus: var(--magi-green-neon);
 
   /* Typography */
-  --magi-font:         'Share Tech Mono', 'JetBrains Mono', 'Courier New', monospace;
-  --magi-font-size:    13px;
-  --magi-line-height:  1.5;
+  --magi-font-mono: 'Share Tech Mono', 'JetBrains Mono', 'Cascadia Mono', 'SFMono-Regular', 'Consolas', monospace;
+  --magi-font-ui: var(--magi-font-mono);
+  --magi-font-size-00: 0.625rem;
+  --magi-font-size-0: 0.6875rem;
+  --magi-font-size-1: 0.8125rem;
+  --magi-font-size-2: 0.875rem;
+  --magi-font-size-3: 1rem;
+  --magi-font-size-4: 1.25rem;
+  --magi-font-size-5: 1.5rem;
+  --magi-line-height-tight: 1.25;
+  --magi-line-height: 1.5;
+  --magi-line-height-relaxed: 1.7;
+  --magi-tracking-tight: 0.02em;
+  --magi-tracking-ui: 0.06em;
+  --magi-tracking-label: 0.12em;
+  --magi-tracking-display: 0.2em;
+
+  /* Spacing */
+  --magi-space-0: 0;
+  --magi-space-1: 0.125rem;
+  --magi-space-2: 0.25rem;
+  --magi-space-3: 0.375rem;
+  --magi-space-4: 0.5rem;
+  --magi-space-5: 0.75rem;
+  --magi-space-6: 1rem;
+  --magi-space-7: 1.5rem;
+  --magi-space-8: 2rem;
+  --magi-space-9: 3rem;
+
+  /* Shape and sizing */
+  --magi-border-width: 1px;
+  --magi-radius-0: 0;
+  --magi-radius-1: 0.125rem;
+  --magi-radius-2: 0.25rem;
+  --magi-radius-round: 999px;
+  --magi-control-height-sm: 1.75rem;
+  --magi-control-height: 2.25rem;
+  --magi-control-height-lg: 2.75rem;
+  --magi-control-padding-inline: 0.75rem;
+  --magi-panel-padding: 1rem;
+  --magi-content-width: 80rem;
 
   /* Effects */
-  --magi-glow:         0 0 8px currentColor;
-  --magi-scanline:     rgba(0, 0, 0, 0.08);
+  --magi-shadow-glow-sm: 0 0 4px currentcolor;
+  --magi-shadow-glow: 0 0 8px currentcolor;
+  --magi-shadow-glow-lg: 0 0 12px currentcolor;
+  --magi-shadow-overlay: 0 20px 60px rgb(0 0 0 / 0.55);
+  --magi-scanline: rgb(0 0 0 / 0.08);
+  --magi-transition-fast: 75ms;
+  --magi-transition: 150ms;
+  --magi-transition-slow: 250ms;
+  --magi-ease: cubic-bezier(0.2, 0, 0, 1);
+  --magi-focus-ring: 0 0 0 1px var(--magi-surface-canvas), 0 0 0 3px var(--magi-focus);
+
+  /* Layering */
+  --magi-z-dropdown: 20;
+  --magi-z-sticky: 30;
+  --magi-z-overlay: 40;
+  --magi-z-toast: 50;
+
+  /* Legacy v1 aliases */
+  --magi-bg: var(--magi-surface-canvas);
+  --magi-panel: var(--magi-surface-panel);
+  --magi-panel-alt: var(--magi-surface-raised);
+  --magi-text: var(--magi-fg);
+  --magi-text-dim: var(--magi-fg-muted);
+  --magi-text-alt: var(--magi-secondary);
+  --magi-accent: var(--magi-primary);
+  --magi-accent-alt: var(--magi-secondary);
+  --magi-blue: var(--magi-info);
+  --magi-red: var(--magi-danger);
+  --magi-amber: var(--magi-warning);
+  --magi-border-hover: var(--magi-border-selected);
+  --magi-font: var(--magi-font-ui);
+  --magi-font-size: var(--magi-font-size-1);
+  --magi-glow: var(--magi-shadow-glow);
+}
+
+[data-magi-density='compact'] {
+  --magi-control-height-sm: 1.5rem;
+  --magi-control-height: 2rem;
+  --magi-control-height-lg: 2.5rem;
+  --magi-control-padding-inline: 0.625rem;
+  --magi-panel-padding: 0.75rem;
+}
+
+[data-magi-density='comfortable'] {
+  --magi-control-height-sm: 2rem;
+  --magi-control-height: 2.5rem;
+  --magi-control-height-lg: 3rem;
+  --magi-control-padding-inline: 0.875rem;
+  --magi-panel-padding: 1.25rem;
 }

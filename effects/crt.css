@@ -1,81 +1,68 @@
-/* ── MAGI CRT Effects ────────────────────────────────── *
- * Optional drop-in. Import after the main theme.
- * To disable: add class "crt-off" to <body>.
- * To toggle: document.body.classList.toggle('crt-off')
- * ─────────────────────────────────────────────────────── */
+/* MAGI CRT effects — optional and explicitly enabled.
+ *
+ * Add data-magi-effects="crt" to the same root that owns data-magi-theme.
+ * Use data-magi-effects="flat" or the legacy crt-off class to disable it.
+ */
 
-/* Scanline overlay — thin horizontal lines */
-body::after {
+:where([data-magi-effects='crt']:not(.crt-off))::after,
+:where([data-magi-effects='crt']:not(.crt-off))::before {
   content: '';
   position: fixed;
   inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+:where([data-magi-effects='crt']:not(.crt-off))::after {
   background: repeating-linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.08) 0px,
-    rgba(0, 0, 0, 0.08) 1px,
+    var(--magi-scanline, rgb(0 0 0 / 0.08)) 0,
+    var(--magi-scanline, rgb(0 0 0 / 0.08)) 1px,
     transparent 1px,
     transparent 3px
   );
-  pointer-events: none;
-  z-index: 100;
 }
 
-/* Vignette — darkened edges */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    transparent 60%,
-    rgba(0, 0, 0, 0.4) 100%
-  );
-  pointer-events: none;
-  z-index: 99;
+:where([data-magi-effects='crt']:not(.crt-off))::before {
+  background: radial-gradient(ellipse at center, transparent 60%, rgb(0 0 0 / 0.42) 100%);
 }
 
-/* Screen flicker — subtle, periodic */
-@keyframes magi-flicker {
-  0%   { opacity: 1; }
-  1%   { opacity: 0.92; }
-  2%   { opacity: 1; }
-  5%   { opacity: 0.97; }
-  6%   { opacity: 1; }
-  93%  { opacity: 1; }
-  94%  { opacity: 0.85; }
-  95%  { opacity: 1; }
-  100% { opacity: 1; }
+:where([data-magi-effects='crt']:not(.crt-off)) {
+  animation: magi-crt-flicker 8s infinite;
 }
 
-body {
-  animation: magi-flicker 8s infinite;
+@keyframes magi-crt-flicker {
+  0%,
+  2%,
+  6%,
+  93%,
+  95%,
+  100% {
+    opacity: 1;
+  }
+
+  1% {
+    opacity: 0.96;
+  }
+
+  5% {
+    opacity: 0.98;
+  }
+
+  94% {
+    opacity: 0.94;
+  }
 }
 
-/* Disable all CRT effects */
-body.crt-off::after,
-body.crt-off::before {
-  display: none !important;
+@media (prefers-reduced-motion: reduce) {
+  :where([data-magi-effects='crt']:not(.crt-off)) {
+    animation: none;
+  }
 }
 
-body.crt-off {
-  animation: none !important;
-}
-
-/* Scrollbar styling */
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-::-webkit-scrollbar-track {
-  background: #050a08;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #1a3328;
-}
-
-/* Fix for Firefox scrollbar */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #1a3328 #050a08;
+@media print {
+  :where([data-magi-effects='crt'])::after,
+  :where([data-magi-effects='crt'])::before {
+    display: none;
+  }
 }
