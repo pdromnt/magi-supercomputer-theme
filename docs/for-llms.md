@@ -26,6 +26,10 @@ The interactive `preview/index.html` is the canonical markup reference.
 - Keep CRT effects optional.
 - Do not name generic components after Amber's dashboard columns or fictional systems.
 - Do not introduce a second icon family.
+- Use the embedded input variant inside bordered command/search surfaces; do not stack a normal focus halo against the surface border.
+- Use `.magi-segmented` for adjacent selected controls so sibling borders cannot cover the active edge.
+- Use `.magi-pane` container queries for resizable sidebars and inspectors. Viewport breakpoints cannot describe a narrow pane inside a wide screen.
+- Menus and command palettes must retain their MAGI surface class. Product CSS may position them, but must not strip their inset, border, background, or shadow.
 
 ## Extension pattern
 
@@ -45,4 +49,7 @@ The interactive `preview/index.html` is the canonical markup reference.
 - hard-coded 4px scrollbars;
 - hover-only disclosure with no keyboard equivalent;
 - global CSS resets leaking outside the theme root;
+- adjacent controls hiding one edge of the selected border;
+- resizable panes clipping toolbar actions instead of stacking or collapsing them;
+- bordered command inputs drawing a second focus rectangle inside the overlay;
 - using animation as the only status signal.

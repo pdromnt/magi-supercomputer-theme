@@ -58,11 +58,11 @@ Effects are opt-in, never block pointer events, stop animating when the user req
 
 ## Component families
 
-- Layout: container, stack, cluster, split, grid, scroll region
+- Layout: container, stack, cluster, split, grid, scroll region, constrained pane
 - Surfaces: panels, headers, footers, tone variants
-- Actions: buttons, icon buttons, toolbars, disabled and destructive states
+- Actions: buttons, icon buttons, adaptive toolbars, segmented controls, disabled and destructive states
 - Forms: inputs, selects, textareas, checkbox, radio, switch, validation copy
-- Navigation: tabs, sidebar navigation, breadcrumbs
+- Navigation: tabs, responsive pane tabs, sidebar navigation, breadcrumbs
 - Feedback: status, badge, alerts, toasts, tooltips
 - Data: definition lists, tables, progress, structured logs
 - Overlays: native dialog, menu, command surface

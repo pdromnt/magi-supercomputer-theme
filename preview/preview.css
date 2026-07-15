@@ -182,6 +182,10 @@ body {
   margin-inline-start: auto;
 }
 
+.adaptive-pane-demo {
+  width: min(100%, 15rem);
+}
+
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -192,10 +196,8 @@ body {
   grid-column: 1 / -1;
 }
 
-.command-items {
-  display: grid;
-  gap: var(--magi-space-1);
-  margin-block-start: var(--magi-space-3);
+.magi-menu__item[data-tone='danger'] {
+  color: var(--magi-danger);
 }
 
 .overlay-grid {

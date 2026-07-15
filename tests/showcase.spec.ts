@@ -44,6 +44,56 @@ test('implements keyboard tab navigation', async ({ page }) => {
   await expect(page.getByRole('tabpanel', { name: 'Members' })).toBeVisible()
 })
 
+test('keeps embedded focus, selected borders, overlays, and constrained panes intact', async ({ page }) => {
+  const commandFilter = page.getByLabel('Filter commands')
+  await commandFilter.focus()
+  const embeddedFocus = await commandFilter.evaluate((element) => {
+    const style = getComputedStyle(element)
+    return {
+      borderTopWidth: style.borderTopWidth,
+      borderBottomColor: style.borderBottomColor,
+      boxShadow: style.boxShadow,
+    }
+  })
+  expect(embeddedFocus.borderTopWidth).toBe('0px')
+  expect(embeddedFocus.borderBottomColor).not.toBe('rgba(0, 0, 0, 0)')
+  expect(embeddedFocus.boxShadow).toBe('none')
+
+  const activeSegment = page.locator('.magi-segmented__item[aria-pressed="true"]')
+  const activeBorders = await activeSegment.evaluate((element) => {
+    const style = getComputedStyle(element)
+    return {
+      left: style.borderLeftColor,
+      right: style.borderRightColor,
+      zIndex: style.zIndex,
+    }
+  })
+  expect(activeBorders.left).toBe(activeBorders.right)
+  expect(activeBorders.zIndex).toBe('1')
+
+  const menu = page.getByRole('menu', { name: 'Note actions' })
+  const menuSurface = await menu.evaluate((element) => {
+    const style = getComputedStyle(element)
+    return { borderStyle: style.borderStyle, padding: style.padding, shadow: style.boxShadow }
+  })
+  expect(menuSurface.borderStyle).toBe('solid')
+  expect(menuSurface.padding).not.toBe('0px')
+  expect(menuSurface.shadow).not.toBe('none')
+
+  const pane = page.locator('.adaptive-pane-demo')
+  const toolbar = pane.locator('.magi-toolbar')
+  const paneBounds = await pane.boundingBox()
+  const toolbarBounds = await toolbar.boundingBox()
+  expect((toolbarBounds?.x ?? 0) + (toolbarBounds?.width ?? 0)).toBeLessThanOrEqual(
+    (paneBounds?.x ?? 0) + (paneBounds?.width ?? 0) + 1,
+  )
+  expect(
+    await pane.locator('.magi-tab').evaluateAll((items) =>
+      items.every((item) => item.scrollWidth <= item.clientWidth),
+    ),
+  ).toBe(true)
+})
+
 test('@a11y has no serious axe violations', async ({ page }) => {
   const results = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
@@ -56,11 +106,17 @@ test('@visual desktop component reference', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'chromium', 'Desktop reference belongs to the desktop project')
   await expect(page.locator('#buttons')).toHaveScreenshot('buttons-desktop.png', { animations: 'disabled' })
   await expect(page.locator('#forms')).toHaveScreenshot('forms-desktop.png', { animations: 'disabled' })
+  await expect(page.locator('#navigation')).toHaveScreenshot('navigation-desktop.png', { animations: 'disabled' })
   await expect(page.locator('#feedback')).toHaveScreenshot('feedback-desktop.png', { animations: 'disabled' })
+  await page.getByLabel('Filter commands').focus()
+  await expect(page.locator('#overlays')).toHaveScreenshot('overlays-focused-desktop.png', { animations: 'disabled' })
 })
 
 test('@visual mobile component reference', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'mobile-chromium', 'Mobile reference belongs to the mobile project')
   await page.locator('#forms').scrollIntoViewIfNeeded()
   await expect(page.locator('#forms')).toHaveScreenshot('forms-mobile.png', { animations: 'disabled' })
+  await expect(page.locator('#navigation')).toHaveScreenshot('navigation-mobile.png', { animations: 'disabled' })
+  await page.getByLabel('Filter commands').focus()
+  await expect(page.locator('#overlays')).toHaveScreenshot('overlays-focused-mobile.png', { animations: 'disabled' })
 })
