@@ -3,9 +3,9 @@
 <img width="1511" height="884" alt="image" src="https://github.com/user-attachments/assets/3ece35f8-df80-4303-b6a0-f0b54c0510d5" />
 
 
-MAGI is a framework-agnostic design system for dense, terminal-inspired web interfaces. It preserves the luminous green, amber, and blue language established by [Amber](https://github.com/pdromnt/amber), then supplies the boring-but-essential parts a production UI needs: readable secondary text, visible controls, focus states, density modes, responsive behavior, and accessible feedback.
+MAGI is a framework-agnostic design system for dense, terminal-inspired web interfaces. It preserves the luminous green, amber, and blue language established by my personal dashboard project, Amber, then supplies the boring-but-essential parts a production UI needs: readable secondary text, visible controls, focus states, density modes, responsive behavior, and accessible feedback.
 
-This repository contains CSS—not an application shell. Product-specific terminology, navigation, and fictional chrome belong in the product using MAGI.
+This repository contains CSS, not an application shell. Product-specific terminology, navigation, and fictional chrome belong in the product using MAGI.
 
 ## Preview
 
